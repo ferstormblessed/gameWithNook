@@ -5,21 +5,27 @@
 #include "NOOK/Utils/Config.h"
 #include "NOOK/Utils/utils.h"
 #include "NOOK/Utils/Register.h"
-#include "Games/Pong.h"
-#include "Games/InfiniteRunner.h"
+#include "NOOK/Games/InfiniteRunner.h"
+#include "NOOK/Games/Pong.h"
 
 NOOK::Coordinator gCoordinator;
 NOOK::ResourceManager resourceManager;
 NOOK::Config config;
 NOOK::GAME_STATE gameState = NOOK::PLAY_STATE;
 
-int main() {
-    std::cout << "INFO: ENTRY POINT: STARTING GAME" << std::endl;
-    // Initialize coordinator
+int main(int argc, char* argv[]) {
+    std::cout << "INFO: INITIALIZING ENGINE" << std::endl;
+    // ------------ COORDINATOR -----------
     gCoordinator.init();
+    // ------------ COORDINATOR -----------
 
     // ------------ LOAD CONFIG ------------
-    config = NOOK::loadConfigFromFile("/home/stormblessed/gameWithNook/config.txt");
+    if (argc < 2) {
+        std::cerr << "ERROR: Need to pass configuration file as command line argument." << std::endl;
+        std::cerr << "ERROR: example --> ./executable config.txt" << std::endl;
+        return 1;
+    }
+    config = NOOK::loadConfigFromFile(argv[1]);
     // ------------ LOAD CONFIG ------------
 
     // ------------ WORLD BOX2D ------------
@@ -37,8 +43,9 @@ int main() {
     resourceManager.init();
     // ------------ RESOURCE MANAGER ------------
 
-    // Register COMPONENTS
+    // ---------- REGISTER COMPONENTS -----------
     NOOK::registerComponents();
+    // ---------- REGISTER COMPONENTS -----------
 
     // ------------ REGISTER SYSTEMS ------------
     // Render Shape System
@@ -73,11 +80,14 @@ int main() {
     debugSystem->init();
     // ------------ REGISTER SYSTEMS ------------
 
+    // TEMPLATE
+
     // ----------------- GAMES ------------------
+    // Go to function definition to change/see the game code
     // Pong
-    // Pong::Pong(config);
+    // NOOK::Pong::Pong(config);
     // Infinite Runner
-    InfiniteRunner::InfiniteRunner(config);
+    NOOK::InfiniteRunner::InfiniteRunner(config);
     // ----------------- GAMES ------------------
 
     // ---------------- GAME LOOP ---------------

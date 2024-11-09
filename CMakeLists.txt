@@ -12,8 +12,7 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(Nook)
 
 # Create an executable target
-add_executable(main main.cpp Games/Pong.h
-        Games/InfiniteRunner.h)
+add_executable(main main.cpp)
 
 # Include directories for Nook
 target_include_directories(main PRIVATE ${Nook_SOURCE_DIR}/include)
@@ -22,4 +21,4 @@ target_include_directories(main PRIVATE ${Nook_SOURCE_DIR}/include)
 target_link_libraries(main PRIVATE NOOK sfml-graphics sfml-audio ImGui-SFML::ImGui-SFML box2d)
 
 # Agregar la ruta de búsqueda para la biblioteca Nook
-link_directories(${Nook_BINARY_DIR})  # Asegúrate de que la ruta sea correcta
+link_directories(${Nook_BINARY_DIR})
