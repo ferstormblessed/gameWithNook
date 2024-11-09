@@ -7,6 +7,7 @@
 #include "NOOK/Utils/Register.h"
 #include "NOOK/Games/InfiniteRunner.h"
 #include "NOOK/Games/Pong.h"
+#include "NOOK/Games/Platformer.h"
 
 NOOK::Coordinator gCoordinator;
 NOOK::ResourceManager resourceManager;
@@ -87,7 +88,9 @@ int main(int argc, char* argv[]) {
     // Pong
     // NOOK::Pong::Pong(config);
     // Infinite Runner
-    NOOK::InfiniteRunner::InfiniteRunner(config);
+    // NOOK::InfiniteRunner::InfiniteRunner(config);
+    // Platformer
+    NOOK::Platformer::Platformer(config);
     // ----------------- GAMES ------------------
 
     // ---------------- GAME LOOP ---------------
